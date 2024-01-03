@@ -24,8 +24,8 @@ h1 {
   line-height: 1.1;
 }
 
-#buttons {
-  gap: 30px;
-  justify-content: center;
-  transition: 10ms;
+
+#preview {
+  text-align: left;
+  padding: 3;
 }
