@@ -1,3 +1,3 @@
 # FreeCodeCamp SolutionProjects
 
-Projects of Frontend Library course created from my inspiration !
+Basic projects of Frontend Library course created from my inspiration !
