@@ -43,22 +43,22 @@ class Calculator extends React.Component {
 
   // Handles numbers pressed
   handleNum(keypressed) {
-    if (op == "") {
-      num1 == 0 && keypressed !== "."
-        ? this.setStateNum1(String(keypressed))
-        : !String(num1).includes(".")
-        ? this.setStateNum1(String(num1) + String(keypressed))
-        : keypressed !== "."
-        ? this.setStateNum1(String(num1) + String(keypressed))
-        : console.log("float");
+    if (this.state.operator == "") {
+      this.state.num1 == 0 && keypressed !== "."
+        ? this.setStateNum1(keypressed)
+        : !String(this.state.num1).includes(".")
+          ? this.setStateNum1(`${this.state.num1} ${keypressed}`)
+          : keypressed !== "."
+            ? this.setStateNum1(`${this.state.num1} ${keypressed}`)
+            : console.log("float");
     } else {
-      num2 == null && keypressed !== "."
+      this.state.num2 == null && keypressed !== "."
         ? this.setStateNum2(String(keypressed))
-        : !String(num2).includes(".")
-        ? this.setStateNum2(String(num2) + String(keypressed))
-        : keypressed !== "."
-        ? this.setStateNum2(String(num2) + String(keypressed))
-        : console.log("float");
+        : !String(this.state.num2).includes(".")
+          ? this.setStateNum2(`${this.state.num2} ${keypressed}`)
+          : keypressed !== "."
+            ? this.setStateNum2(`${this.state.num2} ${keypressed}`)
+            : console.log("float");
     }
     this.setOutput();
   }
@@ -67,27 +67,32 @@ class Calculator extends React.Component {
   handleOp(opPressed) {
     if (opPressed === "AC") {
       this.setState((state) => ({ num1: 0, num2: null, operator: "" }));
-    } else if (op === "") {
+    }
+    else if (this.state.operator === "") {
       this.setOperator(opPressed);
-    } else if (opPressed === "=" && num2 !== null) {
+    }
+    else if (opPressed === "=" && this.state.num2 !== null) {
       this.setState((state) => ({
-        num1: eval(Number(num1) + op + Number(num2)),
+        num1: eval(`${this.state.num1}${this.state.operator}${this.state.num2}`),
         num2: null,
         operator: "",
       }));
-    } else if (num2 !== null && op !== "" && num2 !== "-") {
+    }
+    else if (this.state.num2 !== null && this.state.operator !== "" && this.state.num2 !== "-") {
       this.setState((state) => ({
-        num1: eval(Number(num1) + op + Number(num2)),
+        num1: eval(`${this.state.num1}${this.state.operator}${this.state.num2}`),
         num2: null,
         operator: opPressed,
       }));
-    } else if (op !== "" && num2 === null) {
+    }
+    else if (this.state.operator !== "" && this.state.num2 === null) {
       if (opPressed === "-") {
         this.setStateNum2(opPressed);
       } else {
         this.setOperator(opPressed);
       }
-    } else if (num2 !== null) {
+    }
+    else if (this.state.num2 !== null) {
       this.setStateNum2(null);
       this.setOperator(opPressed);
     }
@@ -102,46 +107,46 @@ class Calculator extends React.Component {
           <button id="clear" onClick={this.handleOp("AC")}>
             AC
           </button>
-          <button id="seven" onClick={this.handleNum(7)}>
+          <button id="seven" onClick={this.handleNum("7")}>
             7
           </button>
-          <button id="eight" onClick={this.handleNum(8)}>
+          <button id="eight" onClick={this.handleNum("8")}>
             8
           </button>
-          <button id="nine" onClick={this.handleNum(9)}>
+          <button id="nine" onClick={this.handleNum("9")}>
             9
           </button>
 
           <button id="divide" onClick={this.handleOp("/")}>
             /
           </button>
-          <button id="four" onClick={this.handleNum(4)}>
+          <button id="four" onClick={this.handleNum("4")}>
             4
           </button>
-          <button id="five" onClick={this.handleNum(5)}>
+          <button id="five" onClick={this.handleNum("5")}>
             5
           </button>
-          <button id="six" onClick={this.handleNum(6)}>
+          <button id="six" onClick={this.handleNum("6")}>
             6
           </button>
 
           <button id="multiply" onClick={this.handleOp("*")}>
             *
           </button>
-          <button id="one" onClick={this.handleNum(1)}>
+          <button id="one" onClick={this.handleNum("1")}>
             1
           </button>
-          <button id="two" onClick={this.handleNum(2)}>
+          <button id="two" onClick={this.handleNum("2")}>
             2
           </button>
-          <button id="three" onClick={this.handleNum(3)}>
+          <button id="three" onClick={this.handleNum("3")}>
             3
           </button>
 
           <button id="subtract" onClick={this.handleOp("-")}>
             -
           </button>
-          <button id="zero" onClick={this.handleNum(0)}>
+          <button id="zero" onClick={this.handleNum("0")}>
             0
           </button>
           <button id="decimal" onClick={this.handleNum(".")}>
